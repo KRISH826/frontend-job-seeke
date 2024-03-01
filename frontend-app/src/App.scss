@@ -1,0 +1,38 @@
+/** @format */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main {
+  min-height: calc(100vh - 310px - 72px);
+}
+
+.shadow-card {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.container {
+  max-width: 1240px;
+  padding: 0px 15px;
+  margin: 0 auto;
+
+  @media (max-width: 1439px) {
+    max-width: 1140px;
+  }
+  @media (max-width: 1199px) {
+    max-width: 1050px;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 800px;
+  }
+
+  @media (max-width: 830px) {
+    max-width: 620px;
+  }
+
+  @media (max-width: 630px) {
+    max-width: 100%;
+  }
+}
