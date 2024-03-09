@@ -63,14 +63,13 @@ const Header = () => {
                       </Link>
                     </li>
                     <li>
-                      {/* <Link
+                      <Link
                         className='font-medium text-black/90'
-                        to={"/applications/me"}
-                        onClick={() => setShow(false)}>
-                        {user && user.role === "Employer"
+                        to={"/applications/me"}>
+                        {userInfo && userInfo.user.role === "Employer"
                           ? "APPLICANT'S APPLICATIONS"
                           : "MY APPLICATIONS"}
-                      </Link> */}
+                      </Link>
                     </li>
                     {userInfo && userInfo.user.role === "Employer" && (
                       <>
