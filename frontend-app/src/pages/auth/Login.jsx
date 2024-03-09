@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -144,12 +144,12 @@ export default function Login() {
               </h2>
               <p className='mt-2 text-sm text-gray-600'>
                 Don&apos;t have an account?{" "}
-                <a
-                  href='#'
+                <Link
+                  to='/register'
                   title=''
                   className='font-semibold text-black transition-all duration-200 hover:underline'>
                   Create a free account
-                </a>
+                </Link>
               </p>
               <form onSubmit={fromHandler} method='POST' className='mt-8'>
                 <div className='space-y-5'>

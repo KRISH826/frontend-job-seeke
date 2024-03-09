@@ -12,28 +12,9 @@ import axios from "axios";
 import { setCredentials } from "./redux/slices/authSlice";
 import Layout from "./layout/Layout";
 import NotFound from "./pages/error/NotFound";
+import Register from "./pages/auth/Register";
 
 function App() {
-  const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:3030/api/v1/user/getuser",
-  //         {
-  //           withCredentials: true,
-  //         }
-  //       );
-  //       console.log(response.data);
-  //       dispatch(setCredentials(response.data.user));
-  //     } catch (error) {
-  //       console.log(error.message);
-  //     }
-  //   };
-  //   fetchUser();
-  // }, []);
-
   return (
     <>
       <Routes>
@@ -43,6 +24,7 @@ function App() {
             <Route path='/about' element={<About />} />
           </Route>
           <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
