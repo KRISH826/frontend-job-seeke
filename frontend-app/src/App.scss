@@ -8,6 +8,21 @@ main {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.banner {
+  background: url(../src/assets/images/banner-main.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: #1111117c;
+  }
+}
+
 .container {
   max-width: 1240px;
   padding: 0px 15px;
@@ -30,5 +45,21 @@ main {
 
   @media (max-width: 630px) {
     max-width: 100%;
+  }
+}
+
+.quill {
+  .ql-toolbar.ql-snow {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    @apply border-gray-300 border;
+  }
+
+  .ql-container.ql-snow {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    min-height: 150px;
+    max-height: 500px;
+    @apply border-gray-300 border;
   }
 }

@@ -11,6 +11,8 @@ import Register from "./pages/auth/Register";
 import ForgetPassword from "./pages/auth/ForgetPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Jobs from "./pages/job/Jobs";
+import PostJob from "./pages/job/PostJob";
+import JobDetails from "./pages/job/JobDetails";
 
 function App() {
   return (
@@ -24,7 +26,10 @@ function App() {
             <Route path='/job/getall' element={<Jobs />} />
           </Route>
           <Route path='' element={<PrivateRoute />}>
-            <Route path='/job/post' element={<Jobs />} />
+            <Route path='/job/post' element={<PostJob />} />
+          </Route>
+          <Route path='' element={<PrivateRoute />}>
+            <Route path='/job/detail/:id' element={<JobDetails />} />
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

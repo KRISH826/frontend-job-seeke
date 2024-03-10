@@ -6,10 +6,11 @@ import Container from "../../components/Container";
 import { Wallet, MapPin, Clock, Bookmark } from "lucide-react";
 import { GoBookmark } from "react-icons/go";
 import Loading from "../../components/Loading";
+import { Link } from "react-router-dom";
 
 const Jobs = () => {
   const [jobData, setJobData] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
     setloading(true);
@@ -39,12 +40,13 @@ const Jobs = () => {
             <Container>
               <div className='grid grid-cols-1 gap-4'>
                 {jobData.map((item) => (
-                  <div
+                  <Link
+                    to={`/job/detail/${item._id}`}
                     key={item._id}
                     className='relative cursor-pointer flex flex-col text-gray-700 bg-white overflow-hidden border-gray-200 border border-solid bg-clip-border rounded-xl hover:border-violet-400'>
                     <div className='p-6'>
-                      <div className='flex flex-wrap gap-x-6 gap-y-3 items-start justify-between'>
-                        <div className='flex mb-2 gap-2 items-start'>
+                      <div className='flex flex-wrap gap-x-6 gap-y-3 items-start flex-row justify-between'>
+                        <div className='flex mb-2 gap-2 items-start flex-1'>
                           <div className='size-16 rounded-lg overflow-hidden'>
                             <img
                               className='size-16 object-cover'
@@ -52,18 +54,22 @@ const Jobs = () => {
                               alt='image'
                             />
                           </div>
-                          <div>
+                          <div className='flex-1'>
                             <h5 className='block mb-0 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900'>
                               {item.title}
                             </h5>
                             <p className='block mt-2 font-sans text-base antialiased font-light leading-relaxed text-inherit'>
-                              {item.description}
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: item.description,
+                                }}></span>
                             </p>
                             <div className='flex mt-1 items-center gap-5'>
                               <span className='flex items-center gap-1'>
                                 <Wallet size={16} className='text-gray-400' />
                                 <span className='text-sm text-gray-400 font-light'>
-                                  Rs. {item.fixedSalary} / Year
+                                  Rs. {item.fixedSalary} {item.salaryForm} -
+                                  {item.salaryTo} / Year
                                 </span>
                               </span>
                               <span className='flex items-center gap-1'>
@@ -102,9 +108,16 @@ const Jobs = () => {
                         Share this job
                       </button>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
+              {jobData.length === 0 && (
+                <>
+                  <h1 className='text-center my-7 text-4xl font-semibold'>
+                    NO DATA FOUND
+                  </h1>
+                </>
+              )}
             </Container>
           </section>
         </>
