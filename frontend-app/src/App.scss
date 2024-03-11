@@ -60,6 +60,7 @@ main {
     border-bottom-right-radius: 8px;
     min-height: 150px;
     max-height: 500px;
+    overflow-y: auto;
     @apply border-gray-300 border;
   }
 }

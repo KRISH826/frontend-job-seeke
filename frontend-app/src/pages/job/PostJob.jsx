@@ -8,11 +8,13 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Banner from "../../components/Banner";
 
 const PostJob = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [smalldescription, setSmallDescription] = useState("");
   const [category, setCategory] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
@@ -72,6 +74,7 @@ const PostJob = () => {
           ? {
               title,
               description,
+              smalldescription,
               category,
               country,
               city,
@@ -81,6 +84,7 @@ const PostJob = () => {
           : {
               title,
               description,
+              smalldescription,
               category,
               country,
               city,
@@ -101,6 +105,7 @@ const PostJob = () => {
 
   return (
     <div className='post_job_section'>
+      <Banner />
       <Container>
         <div className='max-w-[1000px] mx-auto my-20 rounded-xl py-10 px-8 shadow-card'>
           <h1 className='text-center font-semibold text-3xl mb-8'>
@@ -160,6 +165,20 @@ const PostJob = () => {
                       Data Entry Operator
                     </option>
                   </select>
+                </div>
+              </div>
+              <div className='col-span-2'>
+                <label
+                  htmlFor=''
+                  className='text-base font-medium text-gray-900'>
+                  Small Description
+                </label>
+                <div className='mt-2'>
+                  <textarea
+                    className='flex h-24 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50'
+                    value={smalldescription}
+                    onChange={(e) => setSmallDescription(e.target.value)}
+                    placeholder='Small Description'></textarea>
                 </div>
               </div>
               <div className='col-span-2'>

@@ -8,7 +8,7 @@ import { GoBookmark } from "react-icons/go";
 import Loading from "../../components/Loading";
 import { Link } from "react-router-dom";
 
-const Jobs = () => {
+const Myjobs = () => {
   const [jobData, setJobData] = useState([]);
   const [loading, setloading] = useState(true);
 
@@ -16,18 +16,18 @@ const Jobs = () => {
     setloading(true);
     try {
       axios
-        .get("http://localhost:3030/api/v1/job/jobs", {
+        .get("http://localhost:3030/api/v1/job/getmyjobs", {
           withCredentials: true,
         })
         .then((res) => {
           setJobData(res.data.jobs);
+          console.log(res.data.jobs);
         });
       setloading(false);
     } catch (error) {
       console.log(error);
     }
   }, []);
-
   return (
     <>
       {loading ? (
@@ -38,11 +38,12 @@ const Jobs = () => {
         <>
           <section className='job_section my-20'>
             <Container>
-              <div className='flex flex-col gap-4'>
+              <div className='grid grid-cols-1 gap-4'>
                 {jobData.map((item) => (
-                  <div
+                  <Link
+                    to={`/job/detail/${item._id}`}
                     key={item._id}
-                    className='relative flex flex-col text-gray-700 bg-white overflow-hidden border-gray-200 border border-solid bg-clip-border rounded-xl hover:border-violet-400'>
+                    className='relative cursor-pointer flex flex-col text-gray-700 bg-white overflow-hidden border-gray-200 border border-solid bg-clip-border rounded-xl hover:border-violet-400'>
                     <div className='p-6'>
                       <div className='flex flex-wrap gap-x-6 gap-y-3 items-start flex-row justify-between'>
                         <div className='flex mb-2 gap-2 items-start flex-1'>
@@ -58,22 +59,18 @@ const Jobs = () => {
                               {item.title}
                             </h5>
                             <p className='block mt-2 font-sans text-base antialiased font-light leading-relaxed text-inherit'>
-                              {item.smalldescription}
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: item.description,
+                                }}></span>
                             </p>
                             <div className='flex mt-1 items-center gap-5'>
                               <span className='flex items-center gap-1'>
                                 <Wallet size={16} className='text-gray-400' />
-                                {item.fixedSalary && (
-                                  <span className='text-sm text-gray-400 font-light'>
-                                    Rs. {item.fixedSalary} /Year
-                                  </span>
-                                )}
-                                {item.salaryTo && item.salaryFrom && (
-                                  <span className='text-sm text-gray-400 font-light'>
-                                    Rs. {item.salaryFrom} - {item.salaryTo}{" "}
-                                    /Year
-                                  </span>
-                                )}
+                                <span className='text-sm text-gray-400 font-light'>
+                                  Rs. {item.fixedSalary} {item.salaryForm} -
+                                  {item.salaryTo} / Year
+                                </span>
                               </span>
                               <span className='flex items-center gap-1'>
                                 <MapPin size={15} className='text-gray-400' />
@@ -100,19 +97,18 @@ const Jobs = () => {
                       </div>
                     </div>
                     <div className='px-6 flex gap-2 py-4 rounded-b-md rounded-bl-md bg-gray-50'>
-                      <Link
-                        to={`/job/detail/${item._id}`}
+                      <button
                         className='align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-purple-500 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:bg-purple-600 hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none'
                         type='button'>
                         Apply Now
-                      </Link>
+                      </button>
                       <button
                         className='align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none'
                         type='button'>
                         Share this job
                       </button>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
               {jobData.length === 0 && (
@@ -130,4 +126,4 @@ const Jobs = () => {
   );
 };
 
-export default Jobs;
+export default Myjobs;
