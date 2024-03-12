@@ -194,12 +194,13 @@ const Register = () => {
               </form>
             </div>
           </div>
-          <div className='h-full w-full'>
+          <div className='h-full image_div relative after:bg-black/15 after:absolute after:inset-0 w-full'>
             <img
-              className='mx-auto h-full w-full rounded-md object-cover'
+              className='mx-auto h-full w-full object-cover'
               src='https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
               alt=''
             />
+            <div className='absolute inset-0 bg-gradient-to-t from-black to-transparent'></div>
           </div>
         </div>
       </section>

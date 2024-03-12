@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Container from "../../components/Container";
 import Banner from "../../components/Banner";
@@ -49,15 +49,18 @@ const JobDetails = () => {
             <div className='salary'></div>
           </div>
           <div>
-            <p className='mt-6 text-xl'>{Data.description}</p>
+            <p
+              className='mt-6 text-base'
+              dangerouslySetInnerHTML={{ __html: Data.description }}></p>
           </div>
           {userInfo && userInfo.user.role === "Job Seeker" && (
             <div className='apply_btn mt-10'>
-              <button
-                className='select-none font-sans font-bold text-center uppercase disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 px-8 rounded-lg bg-purple-500 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:bg-purple-600 hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none flex gap-1 transition'
+              <Link
+                to={`/application/${Data._id}`}
+                className='select-none w-44 font-sans font-bold text-center uppercase disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 px-8 rounded-lg bg-purple-500 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:bg-purple-600 hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none flex gap-1 transition'
                 type='button'>
                 Apply Now <FaArrowRight className='ml-2' size={16} />
-              </button>
+              </Link>
             </div>
           )}
         </Container>

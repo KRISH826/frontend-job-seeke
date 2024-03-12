@@ -1,5 +1,8 @@
 /** @format */
 
+@import "../src/styles/dialog.module.scss";
+@import "../src/styles/page.module.scss";
+
 main {
   min-height: calc(100vh - 310px - 72px);
 }
@@ -60,6 +63,15 @@ main {
     border-bottom-right-radius: 8px;
     min-height: 150px;
     max-height: 500px;
+    overflow-y: auto;
     @apply border-gray-300 border;
   }
+}
+
+.application_section,
+.post_job_section {
+  background: url(../src/assets/images/curve.jpg);
+  background-repeat: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

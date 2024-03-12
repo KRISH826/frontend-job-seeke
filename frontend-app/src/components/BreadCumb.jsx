@@ -19,7 +19,7 @@ const Breadcrumb = () => {
         return (
           <span key={name} className='flex gap-2 items-center'>
             <span className='text-white text-lg capitalize'>
-              <ChevronRight size={18} color='white' />
+              <ChevronRight className='pt-1' size={22} color='white' />
             </span>
             {isLast ? (
               <span className='text-white text-lg capitalize'>{name}</span>

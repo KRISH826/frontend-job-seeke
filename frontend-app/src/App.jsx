@@ -3,16 +3,24 @@
 import "./App.scss";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/Login";
-import Home from "./pages/Home/Home";
 import PrivateRoute from "./routes/PrivateRoute";
 import Layout from "./layout/Layout";
 import NotFound from "./pages/error/NotFound";
 import Register from "./pages/auth/Register";
 import ForgetPassword from "./pages/auth/ForgetPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
-import Jobs from "./pages/job/Jobs";
-import PostJob from "./pages/job/PostJob";
-import JobDetails from "./pages/job/JobDetails";
+import Myjobs from "./pages/job/Myjobs";
+import { Suspense, lazy } from "react";
+import Loading from "./components/Loading";
+
+const HomePage = lazy(() => import("./pages/Home/Home"));
+const JobPage = lazy(() => import("./pages/job/Jobs"));
+const PostJobPage = lazy(() => import("./pages/job/PostJob"));
+const JobDetailsPage = lazy(() => import("./pages/job/JobDetails"));
+const ApplicationPage = lazy(() => import("./pages/application/Application"));
+const MyapplicationsPage = lazy(() =>
+  import("./pages/application/Myapplication")
+);
 
 function App() {
   return (
@@ -20,16 +28,67 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path='' element={<PrivateRoute />}>
-            <Route path='/' element={<Home />} />
+            <Route
+              path='/'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <HomePage />
+                </Suspense>
+              }
+            />
           </Route>
           <Route path='' element={<PrivateRoute />}>
-            <Route path='/job/getall' element={<Jobs />} />
+            <Route
+              path='/job/getall'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <JobPage />
+                </Suspense>
+              }
+            />
           </Route>
           <Route path='' element={<PrivateRoute />}>
-            <Route path='/job/post' element={<PostJob />} />
+            <Route
+              path='/job/post'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <PostJobPage />
+                </Suspense>
+              }
+            />
           </Route>
           <Route path='' element={<PrivateRoute />}>
-            <Route path='/job/detail/:id' element={<JobDetails />} />
+            <Route
+              path='/job/detail/:id'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <JobDetailsPage />
+                </Suspense>
+              }
+            />
+          </Route>
+          <Route path='' element={<PrivateRoute />}>
+            <Route path='/job/me' element={<Myjobs />} />
+          </Route>
+          <Route path='' element={<PrivateRoute />}>
+            <Route
+              path='/application/:id'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <ApplicationPage />
+                </Suspense>
+              }
+            />
+          </Route>
+          <Route path='' element={<PrivateRoute />}>
+            <Route
+              path='/applications'
+              element={
+                <Suspense fallback={<Loading />}>
+                  <MyapplicationsPage />
+                </Suspense>
+              }
+            />
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
