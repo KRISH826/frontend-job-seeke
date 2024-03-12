@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { logout } from "../redux/slices/authSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Container from "./Container";
 
 const Header = () => {
@@ -44,48 +44,68 @@ const Header = () => {
             <Container>
               <nav className='py-3 flex gap-3 w-full justify-between items-center'>
                 <div className='logo'>
-                  <Link to='/'>
+                  <NavLink to='/'>
                     <h1>LOGO</h1>
-                  </Link>
+                  </NavLink>
                 </div>
                 <div className='menu grow ml-20'>
                   <ul className='flex gap-6 items-center'>
                     <li>
-                      <Link
-                        className='font-medium text-black/90'
-                        to={"/"}></Link>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-purple-600 font-medium"
+                            : "font-medium text-black/90"
+                        }
+                        to={"/"}></NavLink>
                     </li>
                     <li>
-                      <Link
-                        className='font-medium text-black/90'
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-purple-600 font-medium"
+                            : "font-medium text-black/90"
+                        }
                         to={"/job/getall"}>
                         ALL JOBS
-                      </Link>
+                      </NavLink>
                     </li>
                     <li>
-                      <Link
-                        className='font-medium text-black/90'
-                        to={"/applications/me"}>
+                      <NavLink
+                        className={({ isActive }) =>
+                          isActive
+                            ? "text-purple-600 font-medium"
+                            : "font-medium text-black/90"
+                        }
+                        to={"/applications"}>
                         {userInfo && userInfo.user.role === "Employer"
                           ? "APPLICANT'S APPLICATIONS"
                           : "MY APPLICATIONS"}
-                      </Link>
+                      </NavLink>
                     </li>
                     {userInfo && userInfo.user.role === "Employer" && (
                       <>
                         <li>
-                          <Link
-                            className='font-medium text-black/90'
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "text-purple-600 font-medium"
+                                : "font-medium text-black/90"
+                            }
                             to={"/job/post"}>
                             POST NEW JOB
-                          </Link>
+                          </NavLink>
                         </li>
                         <li>
-                          <Link
-                            className='font-medium text-black/90'
+                          <NavLink
+                            className={({ isActive }) =>
+                              isActive
+                                ? "text-purple-600 font-medium"
+                                : "font-medium text-black/90"
+                            }
                             to={"/job/me"}>
                             VIEW YOUR JOBS
-                          </Link>
+                          </NavLink>
                         </li>
                       </>
                     )}
